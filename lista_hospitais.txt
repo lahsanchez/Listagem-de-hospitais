@@ -1,0 +1,53 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  final List<String> hospitais = ["Hospital do Rim e Hipertensão", " Hospital das Clínicas", "Hospital das Clínicas", "Hospital Amaral Carvalho", "Instituto Dante Pazzanese de Cardiologia", "Hospital de Reabilitação de Anomalias Craniofaciais", "Instituto do Coração (Incor) do Hospital das Clínicas", "Instituto Brasileiro de Controle do Câncer"];
+  
+  final List<String> enderecos = ["R. Borges Lagoa, 960 - Vila Clementino, São Paulo - SP, 04038-002", "R. Ten. Catão Roxo, 3900 - Vila Monte Alegre, Ribeirão Preto - SP, 14015-010", "Av. Sampaio Vidal, 42 - Centro, Marília - SP, 17500-030", "R. Doná Silvéria, 150 - Chácara Braz Miraglia, Jaú - SP, 17210-070", "Av. Dr. Dante Pazzanese, 500 - Vila Mariana, São Paulo - SP, 04012-909", "R. Silvio Marchione, 3-20 - Vila Nova Cidade Universitaria, Bauru - SP, 17012-900", "Av. Dr. Enéas Carvalho de Aguiar, 44 - Cerqueira César, São Paulo - SP, 05403-900", "Av. Alcântara Machado, 2576 - Mooca, São Paulo - SP, 03102-002"];
+  
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Welcome to Flutter',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Lista de Hospitais'),
+        ),
+        body: ListView.builder(
+          itemCount: hospitais.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+            title: Text('${hospitais[index]}'),
+              onTap: () {
+                Navigator.push(
+                context, MaterialPageRoute(
+                builder: (context) => Endereco(localizacao: enderecos[index])),
+                );                
+              },
+            );
+          }
+        ),
+      ),
+    );
+  }
+}
+
+class Endereco extends StatelessWidget{
+  final String localizacao;
+  
+  Endereco({Key key, @required this.localizacao}) : super (key: key);
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+    appBar: AppBar(
+        title: Text("Endereço do Hospital"),
+      ),
+      body: Center(
+        child: Text(localizacao),
+      ),
+  );
+}
+}
